@@ -31,7 +31,7 @@ class EmployeeHome extends Component{
 
     getEmpDetails = () => {
         const employeeName = this.props.empName;
-        return fetch("http://localhost:5050/api/employee-list")
+        return fetch("https://uspetropayrole-backend.onrender.com/api/employee-list")
           .then(res => res.json())
           .then(data => {
             const employee = data.find(each => each.name === employeeName);
@@ -133,7 +133,7 @@ class EmployeeHome extends Component{
           console.log(dayPayDollars)
           const fileNameFormat = `C:/Users/US Petro/OneDrive/Desktop/${month}-${year}.xlsx`;
       
-          await fetch('http://localhost:5050/clock-data', {
+          await fetch('https://uspetropayrole-backend.onrender.com/clock-data', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -182,7 +182,7 @@ class EmployeeHome extends Component{
 
         const fileNameFormat = `C:/Users/US Petro/OneDrive/Desktop/${month}-${year}.xlsx`;
       
-        return fetch("http://localhost:5050/api/employee-logs", {
+        return fetch("https://uspetropayrole-backend.onrender.com/api/employee-logs", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ fileNameFormat, sheetName: employeeName }),

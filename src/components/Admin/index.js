@@ -45,7 +45,7 @@ class Admin extends Component {
   };
 
   displayEmpDetails= ()=>{
-    fetch("http://localhost:5050/api/employees")
+    fetch("https://uspetropayrole-backend.onrender.com/api/employees")
     .then(res => res.json())
     .then(data => {
       this.setState({ empData: data });
