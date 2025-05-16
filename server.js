@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const XLSX = require('xlsx'); 
+const path = require('path')
 
 const app = express();
 
@@ -21,7 +22,8 @@ app.post('/clock-data', (req, res) => {
   const { name, clockInDate, clockInTime, clockOutTime, clockOutDate, TotalHours, fileNameFormat, decimalHours, dayPayDollars } = req.body;
     const tempFilePath = './blanksheet.xlsx'
   
-  const saveFilePath = fileNameFormat;
+    const fileName = path.basename(fileNameFormat);
+    const saveFilePath = path.join(__dirname, 'generated', fileName);
 
   let workbook;
 
@@ -60,10 +62,11 @@ app.post('/clock-data', (req, res) => {
 app.get("/api/employees", (req, res) => {
     const tempFilePath = "./blanksheet.xlsx";
     const {fileNameFormat} = req.body
-    const filePath = fileNameFormat
+    const fileName = path.basename(fileNameFormat);
+    const saveFilePath = path.join(__dirname, 'generated', fileName);
     let workbook
-    if (fs.existsSync(filePath)) {
-      workbook = XLSX.readFile(filePath);
+    if (fs.existsSync(saveFilePath)) {
+      workbook = XLSX.readFile(saveFilePath);
     } else {
       workbook = XLSX.readFile(tempFilePath);
       console.log("writing to Blank sheet")
@@ -86,21 +89,22 @@ app.get("/api/employees", (req, res) => {
   app.post('/api/employee-logs', (req, res) => {
     const { fileNameFormat, sheetName } = req.body;
     const tempFilePath= "./blanksheet.xlsx"
-    let filePath = fileNameFormat;
+    const fileName = path.basename(fileNameFormat);
+    const saveFilePath = path.join(__dirname, 'generated', fileName);
 
-    if (!filePath || !sheetName) {
+    if (!saveFilePath || !sheetName) {
       return res.status(400).json({ error: "Missing fileNameFormat or sheetName" });
     }
   
-    if (!fs.existsSync(filePath)) {
+    if (!fs.existsSync(saveFilePath)) {
 
-      filePath = tempFilePath;
+      saveFilePath = tempFilePath;
       console.log("writing to blank sheet")
     }
-    console.log(filePath)
+    console.log(saveFilePath)
   
     try {
-      const workbook = XLSX.readFile(filePath);
+      const workbook = XLSX.readFile(saveFilePath);
       const sheet = workbook.Sheets[sheetName];
   
       if (!sheet) {

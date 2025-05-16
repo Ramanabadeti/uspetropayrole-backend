@@ -131,7 +131,7 @@ class EmployeeHome extends Component{
           const payRate = await this.getEmpDetails(); // Wait here
           const dayPayDollars = (decimalHours * payRate).toFixed(2);
           console.log(dayPayDollars)
-          const fileNameFormat = `/Users/ramanabadeti/Desktop/${month}-${year}.xlsx`;
+          const fileNameFormat = `${month}-${year}.xlsx`;
 
           await fetch('https://uspetropayrole-backend.onrender.com/clock-data', {
             method: 'POST',
@@ -180,7 +180,7 @@ class EmployeeHome extends Component{
         const employeeName = this.props.empName;
         const {month, year} = this.state
 
-        const fileNameFormat = `/Users/ramanabadeti/Desktop/${month}-${year}.xlsx`;
+        const fileNameFormat = `${month}-${year}.xlsx`;
       
         return fetch("https://uspetropayrole-backend.onrender.com/api/employee-logs", {
           method: "POST",
