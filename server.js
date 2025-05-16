@@ -6,7 +6,7 @@ const XLSX = require('xlsx');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://uspetropayrole-4mql-ramana-badetis-projects.vercel.app'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
 }));
