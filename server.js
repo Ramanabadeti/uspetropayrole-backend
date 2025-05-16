@@ -54,7 +54,7 @@ app.post('/clock-data', (req, res) => {
 });
 
 app.get("/api/employees", (req, res) => {
-    const tempFilePath = "C:/Users/US Petro/OneDrive/Desktopp/blanksheet.xlsx";
+    const tempFilePath = "./blanksheet.xlsx";
     const {fileNameFormat} = req.body
     const filePath = fileNameFormat
     let workbook
@@ -81,7 +81,7 @@ app.get("/api/employees", (req, res) => {
 
   app.post('/api/employee-logs', (req, res) => {
     const { fileNameFormat, sheetName } = req.body;
-    const tempFilePath= "C:/Users/US Petro/OneDrive/Desktop/blanksheet.xlsx"
+    const tempFilePath= "./blanksheet.xlsx"
     let filePath = fileNameFormat;
 
     if (!filePath || !sheetName) {
@@ -114,7 +114,7 @@ app.get("/api/employees", (req, res) => {
 
 // to get employee names
   app.get('/api/employee-list', (req, res) => {
-    const filePath = 'C:/Users/US Petro/OneDrive/Desktop/blanksheet.xlsx'
+    const filePath = './blanksheet.xlsx'
   
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: "File not found" });
